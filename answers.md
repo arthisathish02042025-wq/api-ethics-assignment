@@ -64,6 +64,7 @@ for page in range(1, 101):
     time.sleep(1) 
 
 **Corrected code(complete code):**
+`````````````````````````````````````python code`````````````````````````````````````````````````````````````````
 import os
 import time
 import requests
@@ -94,5 +95,6 @@ def fetch_records():
 all_records = fetch_records()
 if all_records:
     save_to_database(all_records)
+````````````````````````````````````````````````END OF CODE````````````````````````````````````````````````````````
 
 o	Justification: These often contain "accidental PII" (e.g., "Patient's wife, Jane, noted..."). Need to use text-processing tools to remove names or specific dates from these free-text fields.
