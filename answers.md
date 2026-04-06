@@ -1,7 +1,7 @@
 # api-ethics-assignment
-#----------Task1----------
+**#----------Task1----------**
 Task 1 — Classify and Handle PII Fields The dataset contains the following fields: full_name, email, date_of_birth, zip_code, job_title, diagnosis_notes Classify each field as either Direct PII or Indirect PII. For each field, state whether you would drop it, mask it, or pseudonymize it before sharing, and briefly justify your choice.
-1. Direct PII (Personally Identifiable Information)
+**1. Direct PII (Personally Identifiable Information)**
 These fields can identify a specific individual on their own.
 •	full_name
 o	Action: Drop or Pseudonymize.
@@ -9,7 +9,7 @@ o	Justification: Names are the most direct identifiers. If the partner doesn't n
 •	email
 o	Action: Drop.
 o	Justification: Emails are unique to individuals and provide a direct contact method. They are rarely necessary for health research.
-2. Indirect PII (Quasi-Identifiers)
+**2. Indirect PII (Quasi-Identifiers)**
 These don't identify someone alone but can be combined with other public data (like voter records) to "re-identify" a patient.
 •	date_of_birth
 o	Action: Mask (Generalize).
@@ -23,22 +23,19 @@ o	Justification: If a title is rare (e.g., "CEO of [Specific Local Company]"), i
 •	diagnosis_notes
 o	Action: Mask (Scrub).
 
-#----------Task2----------
+**#----------Task2----------**
 Task 2 — Audit the API Script for Ethical Compliance
 Your team's data collection script is shown below:
 
 **Given code:**
 import requests
-
 API_URL = "https://healthstats-api.example.com/records"
 API_KEY = "free_tier_key_abc123"
-
 records = []
 for page in range(1, 101):
     response = requests.get(API_URL, params={"page": page, "key": API_KEY})
     data = response.json()
     records.extend(data["results"])
-
 # Store all records permanently in company database
 save_to_database(records)
 
@@ -74,33 +71,25 @@ import requests
 # 1. Security: Use Environment Variables for sensitive API keys
 API_URL = "https://example.com"
 API_KEY = os.getenv("HEALTH_STATS_API_KEY")
-
 def save_to_database(data):
     # Placeholder for database logic
     pass
-
 def fetch_records():
     records = []
     try:
         # Loop through pages 1 to 100
         for page in range(1, 101):
             # Include a timeout to prevent the script from hanging indefinitely
-            response = requests.get(API_URL, params={"page": page, "key": API_KEY}, timeout=10)
-            
+            response = requests.get(API_URL, params={"page": page, "key": API_KEY}, timeout=10) 
             # Check for HTTP errors (e.g., 404, 500)
             response.raise_for_status()
-            
             data = response.json()
             records.extend(data.get("results", []))
-            
             # 2. Ethics/TOS: Throttling to avoid overwhelming the API server
-            time.sleep(1) 
-            
+            time.sleep(1)     
     except requests.exceptions.RequestException as e:
         print(f"Error during API collection: {e}")
-    
     return records
-
 # Execute the collection and save
 all_records = fetch_records()
 if all_records:
